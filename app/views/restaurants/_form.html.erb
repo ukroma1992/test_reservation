@@ -1,0 +1,11 @@
+<%= simple_form_for @restaurant do |f| %> 
+
+  <%= f.input :name, label: false, placeholder: 'Name' %>
+  <%= f.input :description, label: false, placeholder: 'Description' %>
+  <%= f.input :address, placeholder: 'Address', label: false %>
+  <%= f.input :phone, label: false, placeholder: 'Phone' %>
+  <%= f.input :capacity, collection: 1..100, prompt: "Select your capacity", selected: 20 %>
+  <%= f.input :category, priority: [ "Italian" ], collection: ["Chinese", "Italian", "Fusion"], label: 'Category' %>
+
+  <%= f.button :submit %>
+<% end %>

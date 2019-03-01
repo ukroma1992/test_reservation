@@ -1,0 +1,17 @@
+<h1 class="text-center">Restaurants</h1>
+
+<% if @restaurants.present? %>
+  <% @restaurants.each do |restaurant| %>
+    <table class="table table-dark">
+      <tbody>
+        <tr>
+          <td><%= link_to restaurant.name, restaurant_path(restaurant) %></td>
+        </tr>   
+      </tbody>
+    </table>
+  <% end %>
+<% else %>
+  <%= link_to "Add new Restaurant", new_restaurant_path, class: "btn btn-block btn-primary" %>
+<% end %>
+
+<%= link_to "Add new Restaurant", new_restaurant_path, class: "btn btn-block btn-primary" %>

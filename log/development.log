@@ -1,0 +1,726 @@
+  [1m[35m (278.1ms)[0m  [1m[35mCREATE DATABASE "test_reservation_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (237.8ms)[0m  [1m[35mCREATE DATABASE "test_reservation_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5809998923087269995)[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+Migrating to CreateUsers (20190301100313)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (11.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190301100313_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190301100313"]]
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+Migrating to CreateRestaurants (20190301100524)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "restaurants" ("id" bigserial primary key, "name" character varying, "description" text, "address" character varying, "phone" character varying, "category" character varying, "capacity" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190301100524_create_restaurants.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190301100524"]]
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+Migrating to CreateReservations (20190301100703)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (12.0ms)[0m  [1m[35mCREATE TABLE "reservations" ("id" bigserial primary key, "party_size" integer, "date" date, "time" time, "user_id" bigint, "restaurant_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_48a92fce51"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_0d6bc84231"
+FOREIGN KEY ("restaurant_id")
+  REFERENCES "restaurants" ("id")
+)[0m
+  ↳ db/migrate/20190301100703_create_reservations.rb:3
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE  INDEX  "index_reservations_on_user_id" ON "reservations"  ("user_id")[0m
+  ↳ db/migrate/20190301100703_create_reservations.rb:3
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_reservations_on_restaurant_id" ON "reservations"  ("restaurant_id")[0m
+  ↳ db/migrate/20190301100703_create_reservations.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190301100703"]]
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-03-01 10:07:23.019540"], ["updated_at", "2019-03-01 10:07:23.019540"]]
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5809998923087269995)[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+Started GET "/" for 127.0.0.1 at 2019-03-01 12:53:19 +0200
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by RestaurantsController#index as HTML
+Completed 406 Not Acceptable in 61ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::UnknownFormat (RestaurantsController#index is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+actionpack (5.2.2) lib/action_controller/metal/implicit_render.rb:55:in `default_render'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:194:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (5.2.2) lib/active_support/callbacks.rb:132:in `run_callbacks'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `block in instrument'
+activesupport (5.2.2) lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `instrument'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'
+activerecord (5.2.2) lib/active_record/railties/controller_runtime.rb:24:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:134:in `process'
+actionview (5.2.2) lib/action_view/rendering.rb:32:in `process'
+actionpack (5.2.2) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+actionpack (5.2.2) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.2) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-03-01 12:54:35 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.7ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (4.7ms)
+Completed 500 Internal Server Error in 1322ms (ActiveRecord: 2.7ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `about_us_path' for #<#<Class:0x00007fe51c010eb0>:0x00007fe518863288>):
+    12:   <%= nav_bar fixed: :top, brand: "Ninety Ten" do %>
+    13:     <%= menu_group do %>
+    14:       <%= menu_item "Home", root_path %>
+    15:       <%= menu_item "About Us", about_us_path %>
+    16:       <%= menu_item "Contact", contact_path %>
+    17:     <% end %>
+    18:     <% if current_user %>
+  
+app/views/layouts/application.html.erb:15:in `block (2 levels) in _app_views_layouts_application_html_erb___3061806404085467383_70310997054740'
+app/views/layouts/application.html.erb:13:in `block in _app_views_layouts_application_html_erb___3061806404085467383_70310997054740'
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___3061806404085467383_70310997054740'
+Started GET "/" for 127.0.0.1 at 2019-03-01 12:55:20 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (3.3ms)
+Completed 500 Internal Server Error in 392ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `registration_path' for #<#<Class:0x00007fe51c010eb0>:0x00007fe51d5856d8>
+Did you mean?  restaurant_path):
+    17:         <%= menu_item "Log Out", log_out_path %>
+    18:     <% else %>
+    19:         <%= menu_group pull: :right do %>
+    20:           <%= menu_item "Sign Up", registration_path %>
+    21:           <%= form_for @user, url: session_path(:user) do |f| -%>
+    22:             <p><%= f.text_field :email %></p>
+    23:             <p><%= f.password_field :password %></p>
+  
+app/views/layouts/application.html.erb:20:in `block (2 levels) in _app_views_layouts_application_html_erb___3061806404085467383_70311008435000'
+app/views/layouts/application.html.erb:19:in `block in _app_views_layouts_application_html_erb___3061806404085467383_70311008435000'
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___3061806404085467383_70311008435000'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5809998923087269995)[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5809998923087269995)[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/bin/rake:23
+Started GET "/" for 127.0.0.1 at 2019-03-01 12:58:55 +0200
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.8ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (5.3ms)
+Completed 500 Internal Server Error in 609ms (ActiveRecord: 2.7ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `registration_path' for #<#<Class:0x00007f21ac87aff8>:0x00007f21ac8783e8>
+Did you mean?  restaurant_path):
+    17:         <%= menu_item "Log Out", log_out_path %>
+    18:     <% else %>
+    19:         <%= menu_group pull: :right do %>
+    20:           <%= menu_item "Sign Up", registration_path %>
+    21:           <%= form_for @user, url: session_path(:user) do |f| -%>
+    22:             <p><%= f.text_field :email %></p>
+    23:             <p><%= f.password_field :password %></p>
+  
+app/views/layouts/application.html.erb:20:in `block (2 levels) in _app_views_layouts_application_html_erb___1834280060928518414_69891302686340'
+app/views/layouts/application.html.erb:19:in `block in _app_views_layouts_application_html_erb___1834280060928518414_69891302686340'
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1834280060928518414_69891302686340'
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:00:49 +0200
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.6ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (7.2ms)
+Completed 500 Internal Server Error in 654ms (ActiveRecord: 3.3ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `registration_path' for #<#<Class:0x00000000040d39d8>:0x00000000040d04b8>
+Did you mean?  restaurant_path):
+    17:         <%= menu_item "Log Out", session_path, method: :delete %>
+    18:     <% else %>
+    19:         <%= menu_group pull: :right do %>
+    20:           <%= menu_item "Sign Up", registration_path %>
+    21:           <%= form_for @user, url: session_path(:user) do |f| -%>
+    22:             <p><%= f.text_field :email %></p>
+    23:             <p><%= f.password_field :password %></p>
+  
+app/views/layouts/application.html.erb:20:in `block (2 levels) in _app_views_layouts_application_html_erb__4286041271546353196_33681880'
+app/views/layouts/application.html.erb:19:in `block in _app_views_layouts_application_html_erb__4286041271546353196_33681880'
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb__4286041271546353196_33681880'
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:01:38 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.9ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (2.4ms)
+Completed 500 Internal Server Error in 51ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (First argument in form cannot contain nil or be empty):
+    18:     <% else %>
+    19:         <%= menu_group pull: :right do %>
+    20:           <%= menu_item "Sign Up", new_user_path %>
+    21:           <%= form_for @user, url: session_path(:user) do |f| -%>
+    22:             <p><%= f.text_field :email %></p>
+    23:             <p><%= f.password_field :password %></p>
+    24:             <p><%= f.submit "Sign in" %></p>
+  
+app/views/layouts/application.html.erb:21:in `block (2 levels) in _app_views_layouts_application_html_erb__4286041271546353196_70276393947240'
+app/views/layouts/application.html.erb:19:in `block in _app_views_layouts_application_html_erb__4286041271546353196_70276393947240'
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb__4286041271546353196_70276393947240'
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:03:10 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 43ms (Views: 40.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:03:14 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.7ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 46ms (Views: 41.3ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:03:26 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 43ms (Views: 40.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:03:59 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 49ms (Views: 47.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:06:00 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 47ms (Views: 44.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:09:20 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 38ms (Views: 36.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:09:31 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 43ms (Views: 40.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:10:08 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.5ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 45ms (Views: 43.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:10:08 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.6ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 49ms (Views: 46.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:10:09 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 45ms (Views: 43.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:10:09 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 46ms (Views: 43.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:11:54 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  Rendered restaurants/index.html.erb within layouts/application (0.9ms)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/home/ukroma/Desktop/infozahyst-test/TEST/FINAL/test_reservation/app/views/restaurants/index.html.erb:16: syntax error, unexpected keyword_ensure, expecting keyword_end
+          ensure
+          ^~~~~~
+/home/ukroma/Desktop/infozahyst-test/TEST/FINAL/test_reservation/app/views/restaurants/index.html.erb:18: syntax error, unexpected end-of-input, expecting keyword_end
+          end
+             ^):
+  
+app/views/restaurants/index.html.erb:16: syntax error, unexpected keyword_ensure, expecting keyword_end
+app/views/restaurants/index.html.erb:18: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:12:19 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  Rendered restaurants/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 42ms (Views: 40.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:12:21 +0200
+Processing by RestaurantsController#new as HTML
+Completed 406 Not Acceptable in 54ms (ActiveRecord: 3.7ms)
+
+
+  
+ActionController::UnknownFormat (RestaurantsController#new is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+actionpack (5.2.2) lib/action_controller/metal/implicit_render.rb:55:in `default_render'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:194:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (5.2.2) lib/active_support/callbacks.rb:132:in `run_callbacks'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `block in instrument'
+activesupport (5.2.2) lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `instrument'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'
+activerecord (5.2.2) lib/active_record/railties/controller_runtime.rb:24:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:134:in `process'
+actionview (5.2.2) lib/action_view/rendering.rb:32:in `process'
+actionpack (5.2.2) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+actionpack (5.2.2) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.2) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:13:35 +0200
+Processing by RestaurantsController#new as HTML
+  Rendering restaurants/new.html.erb within layouts/application
+  Rendered restaurants/_form.html.erb (50.3ms)
+  Rendered restaurants/new.html.erb within layouts/application (51.7ms)
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `phone_number' for #<Restaurant:0x00007fd4fec56770>
+Did you mean?  phone_change):
+    13: 	</div>
+    14: 	<div class="field">
+    15: 		<%= r.label :phone_number %> <br>
+    16: 		<%= r.text_field :phone_number %> <br>
+    17: 	</div>
+    18: 	<div class="field">
+    19: 		<%= r.label :category %> <br>
+  
+app/views/restaurants/_form.html.erb:16:in `block in _app_views_restaurants__form_html_erb___3639224840469857562_70276397705020'
+app/views/restaurants/_form.html.erb:1:in `_app_views_restaurants__form_html_erb___3639224840469857562_70276397705020'
+app/views/restaurants/new.html.erb:3:in `_app_views_restaurants_new_html_erb___1276166613385971189_70276392069560'
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:13:57 +0200
+Processing by RestaurantsController#new as HTML
+  Rendering restaurants/new.html.erb within layouts/application
+  Rendered restaurants/_form.html.erb (7.1ms)
+  Rendered restaurants/new.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 49ms (Views: 47.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:21:58 +0200
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/ukroma/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by RestaurantsController#new as HTML
+  Rendering restaurants/new.html.erb within layouts/application
+  Rendered restaurants/_form.html.erb (84.6ms)
+  Rendered restaurants/new.html.erb within layouts/application (86.0ms)
+Completed 200 OK in 345ms (Views: 315.9ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:22:47 +0200
+Processing by RestaurantsController#new as HTML
+  Rendering restaurants/new.html.erb within layouts/application
+  Rendered restaurants/_form.html.erb (14.4ms)
+  Rendered restaurants/new.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 77ms (Views: 76.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:23:53 +0200
+Processing by RestaurantsController#new as HTML
+  Rendering restaurants/new.html.erb within layouts/application
+  Rendered restaurants/_form.html.erb (14.8ms)
+  Rendered restaurants/new.html.erb within layouts/application (16.3ms)
+Completed 200 OK in 65ms (Views: 62.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:24:25 +0200
+Processing by RestaurantsController#new as HTML
+  Rendering restaurants/new.html.erb within layouts/application
+  Rendered restaurants/_form.html.erb (17.7ms)
+  Rendered restaurants/new.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 96ms (Views: 94.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:26:00 +0200
+Processing by RestaurantsController#new as HTML
+  Rendering restaurants/new.html.erb within layouts/application
+  Rendered restaurants/_form.html.erb (18.1ms)
+  Rendered restaurants/new.html.erb within layouts/application (20.4ms)
+Completed 200 OK in 93ms (Views: 91.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/restaurants" for 127.0.0.1 at 2019-03-01 13:26:48 +0200
+Processing by RestaurantsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+nPddooDD75iFqLCwafqU9fweFK5kh22GyrMk4yb7DTEEnurhgvbqbdlkCAobB6eN0AomZi6+7wEMV3iISoTiw==", "restaurant"=>{"name"=>"Best Shaurma", "description"=>"Best Shaurma", "address"=>"Peremogu str 23, Kyiv", "phone"=>"0988767878", "category"=>"Fusion"}, "commit"=>"Create Restaurant"}
+Unpermitted parameter: :phone
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/restaurants_controller.rb:24
+  [1m[36mRestaurant Create (1.7ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "description", "address", "category", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Best Shaurma"], ["description", "Best Shaurma"], ["address", "Peremogu str 23, Kyiv"], ["category", "Fusion"], ["created_at", "2019-03-01 11:26:48.789201"], ["updated_at", "2019-03-01 11:26:48.789201"]]
+  ↳ app/controllers/restaurants_controller.rb:24
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/restaurants_controller.rb:24
+Redirected to http://localhost:3000/restaurants.1
+Completed 302 Found in 11ms (ActiveRecord: 4.0ms)
+
+
+Started GET "/restaurants.1" for 127.0.0.1 at 2019-03-01 13:26:48 +0200
+Processing by RestaurantsController#index as 
+  Rendering restaurants/index.html.erb within layouts/application
+  Rendered restaurants/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 54ms (Views: 45.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/restaurants.1" for 127.0.0.1 at 2019-03-01 13:26:54 +0200
+Processing by RestaurantsController#index as 
+  Rendering restaurants/index.html.erb within layouts/application
+  Rendered restaurants/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 55ms (Views: 49.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/restaurants.1" for 127.0.0.1 at 2019-03-01 13:28:25 +0200
+Processing by RestaurantsController#index as 
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (16.6ms)
+Completed 200 OK in 82ms (Views: 67.9ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/restaurants/1" for 127.0.0.1 at 2019-03-01 13:28:27 +0200
+Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT  "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/restaurants_controller.rb:7
+Completed 406 Not Acceptable in 46ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionController::UnknownFormat (RestaurantsController#show is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+actionpack (5.2.2) lib/action_controller/metal/implicit_render.rb:55:in `default_render'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:194:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (5.2.2) lib/active_support/callbacks.rb:132:in `run_callbacks'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `block in instrument'
+activesupport (5.2.2) lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `instrument'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'
+activerecord (5.2.2) lib/active_record/railties/controller_runtime.rb:24:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:134:in `process'
+actionview (5.2.2) lib/action_view/rendering.rb:32:in `process'
+actionpack (5.2.2) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+actionpack (5.2.2) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.2) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/restaurants.1" for 127.0.0.1 at 2019-03-01 13:28:30 +0200
+Processing by RestaurantsController#index as 
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 58ms (Views: 50.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:30:36 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.6ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 55ms (Views: 52.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:31:14 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 40ms (Views: 38.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/restaurants/new" for 127.0.0.1 at 2019-03-01 13:31:18 +0200
+Processing by RestaurantsController#new as HTML
+  Rendering restaurants/new.html.erb within layouts/application
+  Rendered restaurants/_form.html.erb (20.3ms)
+  Rendered restaurants/new.html.erb within layouts/application (21.8ms)
+Completed 200 OK in 63ms (Views: 61.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/restaurants" for 127.0.0.1 at 2019-03-01 13:31:42 +0200
+Processing by RestaurantsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tG/1pSkvuieeKDi/v0tRk125m6G7UvU+1CmgVAs4pQZ8wQlSRRPN+gMf9i6k+Gm++MghsokPHIByeeMQ84DGOw==", "restaurant"=>{"name"=>"Jonhnie Restaurant", "description"=>"best", "address"=>"Peizazhna Alley, Kyiv", "phone"=>"09887678745", "capacity"=>"100", "category"=>"Italian"}, "commit"=>"Create Restaurant"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/restaurants_controller.rb:24
+  [1m[36mRestaurant Create (1.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "description", "address", "phone", "category", "capacity", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jonhnie Restaurant"], ["description", "best"], ["address", "Peizazhna Alley, Kyiv"], ["phone", "09887678745"], ["category", "Italian"], ["capacity", 100], ["created_at", "2019-03-01 11:31:42.408806"], ["updated_at", "2019-03-01 11:31:42.408806"]]
+  ↳ app/controllers/restaurants_controller.rb:24
+  [1m[35m (3.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/restaurants_controller.rb:24
+Redirected to http://localhost:3000/
+Completed 302 Found in 12ms (ActiveRecord: 5.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-01 13:31:42 +0200
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.erb within layouts/application
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/views/restaurants/index.html.erb:3
+  Rendered restaurants/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 56ms (Views: 54.6ms | ActiveRecord: 0.4ms)
+
+
